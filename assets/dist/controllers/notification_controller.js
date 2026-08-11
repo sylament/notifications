@@ -26,6 +26,17 @@ class notification_controller_default extends Controller {
     });
     window.setTimeout(() => element.remove(), REMOVE_FALLBACK_MS);
   }
+  handleActionClick(event) {
+    const origin = event.target;
+    if (!(origin instanceof Element)) {
+      return;
+    }
+    const trigger = origin.closest("[data-sylament-action-close]");
+    if (!(trigger instanceof HTMLElement) || !this.element.contains(trigger)) {
+      return;
+    }
+    this.close();
+  }
   #expire() {
     if (this.element.matches(":hover")) {
       this.element.addEventListener("mouseleave", () => this.close(), { once: true });

@@ -38,6 +38,20 @@ export default class extends Controller<HTMLElement> {
     window.setTimeout(() => element.remove(), REMOVE_FALLBACK_MS);
   }
 
+  handleActionClick(event: Event): void {
+    const origin = event.target;
+    if (!(origin instanceof Element)) {
+      return;
+    }
+
+    const trigger = origin.closest("[data-sylament-action-close]");
+    if (!(trigger instanceof HTMLElement) || !this.element.contains(trigger)) {
+      return;
+    }
+
+    this.close();
+  }
+
   #expire(): void {
     if (this.element.matches(":hover")) {
       this.element.addEventListener("mouseleave", () => this.close(), { once: true });
