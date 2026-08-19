@@ -65,5 +65,7 @@ it('renders a labelled close button wired to the toast controller', function ():
 
     expect($html)->toContain('sy-no-notification-close-btn')
         ->toContain('aria-label="Close notification"')
-        ->toContain('sylament--notifications--notification#close');
+        ->toContain('sylament--notifications--notification#close')
+        ->toContain('sy-size-md')
+        ->not->toContain('sy-size-sm');
 });
